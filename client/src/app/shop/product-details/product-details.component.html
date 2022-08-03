@@ -56,8 +56,23 @@
    
       <!-- Product Pricing -->
       <div class="product-price">
+        <span class="text-muted">
+          <div class="d-flex align-items-center">
+            <i (click)="decreamentquantity()"
+              class="fa fa-minus-circle text-waring mr-2"
+              style="cursor: pointer; font-size: 2em"
+            ></i>
+            <span class="font-weight-bold" style="font-size: 1.5em">{{
+              quantity
+            }}</span>
+            <i (click)="increamentquantity()"
+              class="fa fa-plus-circle text-warning mx-2"
+              style="cursor: pointer; font-size: 2em"
+            ></i>
+          </div>
+        </span>
         <span>{{product.price|currency}}</span>
-        <a href="#" class="cart-btn">Add to cart</a>
+        <a (click)="addItemToBasket()" class="cart-btn">Add to cart</a>
       </div>
     </div>
   </main>

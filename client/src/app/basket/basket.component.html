@@ -1,0 +1,73 @@
+<div *ngIf="(basket$ | async) === null" class="containter">
+  No items in basket
+</div>
+
+<div>
+  <div *ngIf="basket$ | async as basket" class="Container">
+    <div class="pb-5">
+      <table class="table table-responsive table-hover">
+        <thead>
+          <tr>
+            <th class="text-error">Remove</th>
+            <th>Product Image</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            
+          </tr>
+        </thead>
+        <tbody *ngFor="let item of basket.items">
+          <tr>
+            <td class="align-middle text-center">
+              <a class="tetx-danger">
+                <i (click)="removeBasketItem(item)"
+                class="fa fa-trash fa-sm" ></i>
+              </a>
+            </td>
+            <td>
+              <img
+                src="{{ item.pictureUrl }}"
+                class="img-fluid img-thumbnail"
+                alt="NA"
+                style="height: 50px; width: 50px"
+              />
+            </td>
+            <td>
+              <div class="d-flex align-items-center text-center">
+                <a routerLink="/shop/{{ item.id }}"
+                  ><h5>{{ item.productName }}</h5></a
+                >
+              </div>
+            </td>
+            <td>
+              <span class="text-muted">
+                <div class="d-flex align-items-center">
+                  <i (click)="decreamentItemQuantity(item)"
+                    class="fa fa-minus-circle text-waring mr-2"
+                    style="cursor: pointer; font-size: 2em"
+                  ></i>
+                  <span class="font-weight-bold" style="font-size: 1.5em">{{
+                    item.quantity
+                  }}</span>
+                  <i (click)="increamentItemQuantity(item)"
+                    class="fa fa-plus-circle text-warning mx-2"
+                    style="cursor: pointer; font-size: 2em"
+                  ></i>
+                </div>
+              </span>
+            </td>
+            <td>{{ item.price * item.quantity | currency }}</td>
+           
+          </tr>
+        </tbody>
+      </table>
+      <div class="row">
+      <div class="col-6">
+        <app-order-totals></app-order-totals>
+        <a routerLink="/checkout" class="btn btn-outline-primary py-2 btn-block">Proceed to Checkout</a>
+      </div>
+      </div>
+
+    </div>
+  </div>
+</div>
